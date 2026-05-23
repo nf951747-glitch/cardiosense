@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Patient Assessment — CardioSense</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+
+<body class="predict-page">
+
+  <!-- ── NAVBAR ──────────────────────────────────────────── -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top cs-navbar">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+        <span class="brand-icon"><i class="bi bi-heart-pulse-fill"></i></span>
+        <span class="brand-name">CardioSense</span>
+      </a>
+      <div class="ms-auto">
+        <a href="/" class="btn cs-btn-outline btn-sm">
+          <i class="bi bi-house me-1"></i>Home
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── PAGE HEADER ─────────────────────────────────────── -->
+  <div class="predict-header">
+    <div class="container">
+      <div class="row justify-content-center text-center">
+        <div class="col-lg-7">
+          <div class="predict-step-indicator mb-3">
+            <span class="psi active"><i class="bi bi-clipboard2-pulse"></i> Enter Data</span>
+            <span class="psi-arrow"><i class="bi bi-arrow-right"></i></span>
+            <span class="psi"><i class="bi bi-cpu"></i> Analyse</span>
+            <span class="psi-arrow"><i class="bi bi-arrow-right"></i></span>
+            <span class="psi"><i class="bi bi-file-medical"></i> Results</span>
+          </div>
+          <h1 class="predict-page-title">Patient Clinical Assessment</h1>
+          <p class="predict-page-sub">
+            Fill in the 16 clinical parameters below accurately for the best prediction.
+            All values should be from your most recent medical checkup.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── MAIN FORM ────────────────────────────────────────── -->
+  <div class="predict-body">
+    <div class="container py-5">
+
+      <!-- Error alert -->
+      {% if error %}
+      <div class="alert cs-alert-danger mb-4" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>{{ error }}
+      </div>
+      {% endif %}
+
+      <form action="/predict" method="POST" id="predictForm" novalidate>
+        <div class="row g-4">
+
+          <!-- ════════════════════════════════════════════════
+               GROUP 1 — PATIENT DEMOGRAPHICS
+          ════════════════════════════════════════════════ -->
+          <div class="col-12">
+            <div class="form-section-card">
+              <div class="fsc-header">
+                <i class="bi bi-person-vcard"></i>
+                <span>Patient Demographics</span>
+              </div>
+              <div class="row g-3 fsc-body">
+
+                <!-- Age -->
+                <div class="col-md-4">
+                  <label class="form-label cs-label" for="age">
+                    <i class="bi bi-calendar3"></i> Age
+                    <span class="label-unit">(years)</span>
+                  </label>
+                  <input type="number" class="form-control cs-input" id="age" name="age"
+                    min="0" max="100" placeholder="e.g. 55" required
+                    oninput="if (this.value !== '') this.value = Math.max(0, Math.min(100, parseInt(this.value) || 0));" />
+                </div>
+
+                <!-- Gender -->
+                <div class="col-md-4">
+                  <label class="form-label cs-label" for="sex">
+                    <i class="bi bi-gender-ambiguous"></i> Gender
+                  </label>
+                  <select class="form-select cs-input" id="sex" name="sex" required>
+                    <option value="" disabled selected>Select gender</option>
+                    <option value="1">Male</option>
+                    <option value="0">Female</option>
+                  </select>
+                </div>
+
+                <!-- BMI -->
+                <div class="col-md-4">
+                  <label class="form-label cs-label" for="bmi">
+                    <i class="bi bi-person-standing"></i> BMI
+                    <span class="label-unit">(kg/m²)</span>
+                  </label>
+                  <input type="number" class="form-control cs-input" id="bmi" name="bmi"
+                    min="10" max="70" step="0.1" placeholder="e.g. 24.5" required />
+                  <div class="form-hint">Body Mass Index (weight/height²)</div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- ════════════════════════════════════════════════
+               GROUP 2 — CARDIOVASCULAR MEASUREMENTS
+          ════════════════════════════════════════════════ -->
+          <div class="col-12">
+            <div class="form-section-card">
+              <div class="fsc-header">
+                <i class="bi bi-heart-pulse"></i>
+                <span>Cardiovascular Measurements</span>
+              </div>
+              <div class="row g-3 fsc-body">
+
+                <!-- Chest Pain Type -->
+                <div class="col-md-6">
+                  <label class="form-label cs-label" for="cp">
+                    <i class="bi bi-lungs"></i> Chest Pain Type
+                  </label>
+                  <select class="form-select cs-input" id="cp" name="cp" required>
+                    <option value="" disabled selected>Select type</option>
+                    <option value="1">1 — Typical Angina</option>
+                    <option value="2">2 — Atypical Angina</option>
+                    <option value="3">3 — Non-anginal Pain</option>
+                    <option value="4">4 — Asymptomatic</option>
+                  </select>
+                  <div class="form-hint">Type of chest pain experienced</div>
+                </div>
+
+                <!-- Resting Blood Pressure -->
+                <div class="col-md-6">
+                  <label class="form-label cs-label" for="trestbps">
+                    <i class="bi bi-activity"></i> Resting Blood Pressure
+                    <span class="label-unit">(mm Hg)</span>
+                  </label>
+                  <input type="number" class="form-control cs-input" id="trestbps" name="trestbps"
+                    min="80" max="250" placeholder="e.g. 120" required />
+                  <div class="form-hint">Resting systolic BP on admission</div>
+                </div>
+
+                <!-- Serum Cholesterol -->
+                <div class="col-md-6">
+                  <label class="form-label cs-label" for="chol">
+                    <i class="bi bi-droplet-half"></i> Serum Cholesterol
+                    <span class="label-unit">(mg/dl)</span>
+                  </label>
+                  <input type="number" class="form-control cs-input" id="chol" name="chol"
+                    min="100" max="700" placeholder="e.g. 200" required />
+                  <div class="form-hint">Total serum cholesterol level</div>
+                </div>
+
+                <!-- Max Heart Rate -->
+                <div class="col-md-6">
+                  <label class="form-label cs-label" for="thalach">
+                    <i class="bi bi-heart"></i> Max Heart Rate Achieved
+                    <span class="label-unit">(bpm)</span>
+                  </label>
+                  <input type="number" class="form-control cs-input" id="thalach" name="thalach"
+                    min="60" max="250" placeholder="e.g. 150" required />
+                  <div class="form-hint">Maximum heart rate during exercise</div>
+                </div>
+
+                <!-- Resting ECG -->
+                <div class="col-md-6">
+                  <label class="form-label cs-label" for="restecg">
+                    <i class="bi bi-graph-up"></i> Resting ECG Result
+                  </label>
+                  <select class="form-select cs-input" id="restecg" name="restecg" required>
+                    <option value="" disabled selected>Select result</option>
+                    <option value="0">0 — Normal</option>
+                    <option value="1">1 — ST-T Wave Abnormality</option>
+                    <option value="2">2 — Left Ventricular Hypertrophy</option>
+                  </select>
+                  <div class="form-hint">Resting electrocardiographic result</div>
+                </div>
+
+                <!-- Old Peak (ST Depression) -->
+                <div class="col-md-6">
+                  <label class="form-label cs-label" for="oldpeak">
+                    <i class="bi bi-arrow-down-right"></i> ST Depression (Oldpeak)
+                    <span class="label-unit">(mm)</span>
+                  </label>
+                  <input type="number" class="form-control cs-input" id="oldpeak" name="oldpeak"
+                    min="0" max="10" step="0.1" placeholder="e.g. 1.5" required />
+                  <div class="form-hint">ST depression induced by exercise relative to rest</div>
+                </div>
+
+                <!-- Slope -->
+                <div class="col-md-6">
+                  <label class="form-label cs-label" for="slope">
+                    <i class="bi bi-bar-chart-line"></i> Slope of ST Segment
+                  </label>
+                  <select class="form-select cs-input" id="slope" name="slope" required>
+                    <option value="" disabled selected>Select slope</option>
+                    <option value="1">1 — Upsloping</option>
+                    <option value="2">2 — Flat</option>
+                    <option value="3">3 — Downsloping</option>
+                  </select>
+                  <div class="form-hint">Slope of peak exercise ST segment</div>
+                </div>
+
+                <!-- Major Vessels -->
+                <div class="col-md-6">
+                  <label class="form-label cs-label" for="ca">
+                    <i class="bi bi-diagram-3"></i> Major Vessels Coloured
+                  </label>
+                  <select class="form-select cs-input" id="ca" name="ca" required>
+                    <option value="" disabled selected>Select count</option>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                  </select>
+                  <div class="form-hint">Number of vessels coloured by fluoroscopy</div>
+                </div>
+
+                <!-- Thalassemia -->
+                <div class="col-md-6">
+                  <label class="form-label cs-label" for="thal">
+                    <i class="bi bi-capsule"></i> Thalassemia Type
+                  </label>
+                  <select class="form-select cs-input" id="thal" name="thal" required>
+                    <option value="" disabled selected>Select type</option>
+                    <option value="3">3 — Normal</option>
+                    <option value="6">6 — Fixed Defect</option>
+                    <option value="7">7 — Reversible Defect</option>
+                  </select>
+                  <div class="form-hint">Blood disorder (thalassemia) type</div>
+                </div>
+
+                <!-- Exercise Induced Angina -->
+                <div class="col-md-6">
+                  <label class="form-label cs-label" for="exang">
+                    <i class="bi bi-person-walking"></i> Exercise-Induced Angina
+                  </label>
+                  <select class="form-select cs-input" id="exang" name="exang" required>
+                    <option value="" disabled selected>Select option</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                  </select>
+                  <div class="form-hint">Chest pain triggered by exercise?</div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- ════════════════════════════════════════════════
+               GROUP 3 — LIFESTYLE & METABOLIC FACTORS
+          ════════════════════════════════════════════════ -->
+          <div class="col-12">
+            <div class="form-section-card">
+              <div class="fsc-header">
+                <i class="bi bi-clipboard2-check"></i>
+                <span>Lifestyle & Metabolic Factors</span>
+              </div>
+              <div class="row g-3 fsc-body">
+
+                <!-- Fasting Blood Sugar -->
+                <div class="col-md-4">
+                  <label class="form-label cs-label" for="fbs">
+                    <i class="bi bi-cup-straw"></i> Fasting Blood Sugar
+                  </label>
+                  <select class="form-select cs-input" id="fbs" name="fbs" required>
+                    <option value="" disabled selected>Select</option>
+                    <option value="1">Yes — &gt; 120 mg/dl</option>
+                    <option value="0">No — ≤ 120 mg/dl</option>
+                  </select>
+                  <div class="form-hint">Is fasting blood sugar above 120 mg/dl?</div>
+                </div>
+
+                <!-- Smoking -->
+                <div class="col-md-4">
+                  <label class="form-label cs-label" for="smoking">
+                    <i class="bi bi-wind"></i> Smoking Status
+                  </label>
+                  <select class="form-select cs-input" id="smoking" name="smoking" required>
+                    <option value="" disabled selected>Select status</option>
+                    <option value="1">Current / Former Smoker</option>
+                    <option value="0">Non-Smoker</option>
+                  </select>
+                  <div class="form-hint">Current or past tobacco use</div>
+                </div>
+
+                <!-- Diabetes -->
+                <div class="col-md-4">
+                  <label class="form-label cs-label" for="diabetes">
+                    <i class="bi bi-clipboard2-pulse"></i> Diabetes Status
+                  </label>
+                  <select class="form-select cs-input" id="diabetes" name="diabetes" required>
+                    <option value="" disabled selected>Select status</option>
+                    <option value="1">Diagnosed with Diabetes</option>
+                    <option value="0">No Diabetes</option>
+                  </select>
+                  <div class="form-hint">Previously diagnosed with diabetes?</div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /row -->
+
+        <!-- ── SUBMIT ───────────────────────────────────────── -->
+        <div class="submit-section text-center mt-5">
+          <p class="submit-note mb-4">
+            <i class="bi bi-lock-fill me-1"></i>
+            Your data is processed locally and never stored or shared.
+          </p>
+          <button type="submit" class="btn cs-btn-primary btn-lg submit-btn" id="submitBtn">
+            <i class="bi bi-cpu me-2"></i>
+            <span class="btn-text">Analyse My Risk</span>
+            <span class="btn-loading d-none">
+              <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+              Analysing...
+            </span>
+          </button>
+          <a href="/" class="btn cs-btn-ghost btn-lg ms-3">
+            <i class="bi bi-arrow-left me-1"></i>Cancel
+          </a>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <!-- ── FOOTER ────────────────────────────────────────────── -->
+  <footer class="cs-footer cs-footer--compact">
+    <div class="container">
+      <div class="text-center footer-copy">
+        © 2024 CardioSense. AI-Powered Cardiac Risk Assessment.
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Show loading state on submit
+    document.getElementById('predictForm').addEventListener('submit', function (e) {
+      this.classList.add('was-validated');
+      if (!this.checkValidity()) {
+        e.preventDefault();
+        e.stopPropagation();
+        // Scroll to first invalid field
+        const firstInvalid = this.querySelector(':invalid');
+        if (firstInvalid) firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+      const btn = document.getElementById('submitBtn');
+      btn.querySelector('.btn-text').classList.add('d-none');
+      btn.querySelector('.btn-loading').classList.remove('d-none');
+      btn.disabled = true;
+    });
+
+    // BMI helper
+    const bmiInput = document.getElementById('bmi');
+    const bmiHint = bmiInput.nextElementSibling;
+    bmiInput.addEventListener('input', function() {
+      const v = parseFloat(this.value);
+      if (!isNaN(v)) {
+        let cat = v < 18.5 ? 'Underweight' : v < 25 ? 'Normal' : v < 30 ? 'Overweight' : 'Obese';
+        let col = v < 18.5 ? '#f59e0b' : v < 25 ? '#10b981' : v < 30 ? '#f59e0b' : '#ef4444';
+        bmiHint.innerHTML = `BMI category: <strong style="color:${col}">${cat}</strong>`;
+      } else {
+        bmiHint.textContent = 'Body Mass Index (weight/height²)';
+      }
+    });
+
+    // Enforce age range strictly
+    const ageInput = document.getElementById('age');
+    ageInput.addEventListener('input', function() {
+      if (this.value !== '') {
+        const value = parseInt(this.value, 10);
+        if (!isNaN(value)) {
+          this.value = Math.max(0, Math.min(100, value));
+        }
+      }
+    });
+  </script>
+</body>
+</html>

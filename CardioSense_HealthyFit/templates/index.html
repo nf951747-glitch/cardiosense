@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CardioSense — Heart Disease Risk Prediction</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+
+<body>
+
+  <!-- ── NAVBAR ──────────────────────────────────────────── -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top cs-navbar">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+        <span class="brand-icon"><i class="bi bi-heart-pulse-fill"></i></span>
+        <span class="brand-name">CardioSense</span>
+      </a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+          <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+          <li class="nav-item ms-lg-3">
+            <a class="btn cs-btn-primary" href="/predict">
+              <i class="bi bi-stethoscope me-1"></i>Start Assessment
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── HERO ────────────────────────────────────────────── -->
+  <section class="hero-section">
+    <!-- Animated background blobs -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <div class="container">
+      <div class="row align-items-center min-vh-100 py-5">
+        <!-- Left: text -->
+        <div class="col-lg-6 hero-text-col">
+          <div class="hero-badge mb-4 animate-fade-up">
+            <i class="bi bi-shield-heart-fill me-2"></i>AI-Powered Cardiac Screening
+          </div>
+          <h1 class="hero-title animate-fade-up delay-1">
+            Know Your<br>
+            <span class="gradient-text">Heart Risk</span><br>
+            Before It's Too Late
+          </h1>
+          <p class="hero-desc animate-fade-up delay-2">
+            CardioSense uses an ensemble of advanced machine learning models
+            trained on 3,000+ clinical cases to assess your cardiovascular risk
+            in seconds — with personalized, actionable health recommendations.
+          </p>
+          <div class="d-flex flex-wrap gap-3 animate-fade-up delay-3">
+            <a href="/predict" class="btn cs-btn-primary btn-lg">
+              <i class="bi bi-activity me-2"></i>Check My Risk
+            </a>
+            <a href="#about" class="btn cs-btn-outline btn-lg">
+              <i class="bi bi-info-circle me-2"></i>Learn More
+            </a>
+          </div>
+          <!-- Trust indicators -->
+          <div class="trust-row mt-5 animate-fade-up delay-4">
+            <div class="trust-item">
+              <span class="trust-num">10,000</span>
+              <span class="trust-label">Training Cases</span>
+            </div>
+            <div class="trust-divider"></div>
+            <div class="trust-item">
+              <span class="trust-num">4</span>
+              <span class="trust-label">ML Models</span>
+            </div>
+            <div class="trust-divider"></div>
+            <div class="trust-item">
+              <span class="trust-num">16</span>
+              <span class="trust-label">Clinical Features</span>
+            </div>
+            <div class="trust-divider"></div>
+            <div class="trust-item">
+              <span class="trust-num">68%</span>
+              <span class="trust-label">Accuracy</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: floating card -->
+        <div class="col-lg-6 d-none d-lg-flex justify-content-center align-items-center">
+          <div class="hero-card animate-float">
+            <div class="hc-header">
+              <i class="bi bi-heart-pulse-fill hc-icon"></i>
+              <div>
+                <div class="hc-title">Cardiac Assessment</div>
+                <div class="hc-sub">Real-time analysis</div>
+              </div>
+              <span class="hc-live"><span class="live-dot"></span>LIVE</span>
+            </div>
+            <div class="hc-metrics">
+              <div class="hc-metric">
+                <span class="hc-metric-label"><i class="bi bi-droplet-half me-1"></i>Cholesterol</span>
+                <div class="hc-bar-wrap"><div class="hc-bar" style="width:62%"></div></div>
+                <span class="hc-metric-val normal">Normal</span>
+              </div>
+              <div class="hc-metric">
+                <span class="hc-metric-label"><i class="bi bi-activity me-1"></i>Blood Pressure</span>
+                <div class="hc-bar-wrap"><div class="hc-bar elevated" style="width:74%"></div></div>
+                <span class="hc-metric-val elevated">Elevated</span>
+              </div>
+              <div class="hc-metric">
+                <span class="hc-metric-label"><i class="bi bi-heart me-1"></i>Heart Rate</span>
+                <div class="hc-bar-wrap"><div class="hc-bar" style="width:55%"></div></div>
+                <span class="hc-metric-val normal">Normal</span>
+              </div>
+              <div class="hc-metric">
+                <span class="hc-metric-label"><i class="bi bi-person me-1"></i>BMI</span>
+                <div class="hc-bar-wrap"><div class="hc-bar high" style="width:82%"></div></div>
+                <span class="hc-metric-val high">High</span>
+              </div>
+            </div>
+            <div class="hc-result">
+              <i class="bi bi-shield-exclamation me-2"></i>
+              <span>Moderate Risk Detected — 54.3%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator">
+      <i class="bi bi-chevron-double-down"></i>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ────────────────────────────────────────────── -->
+  <section class="about-section section-pad" id="about">
+    <div class="container">
+      <div class="section-header text-center mb-5">
+        <div class="section-tag">About The Project</div>
+        <h2 class="section-title">Why CardioSense?</h2>
+        <p class="section-sub">
+          Cardiovascular disease is the world's leading cause of death.
+          Early detection through machine learning can save millions of lives.
+        </p>
+      </div>
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-5">
+          <div class="about-stats-grid">
+            <div class="as-card as-card--red">
+              <i class="bi bi-heart-fill"></i>
+              <div class="as-num">17.9M</div>
+              <div class="as-label">Deaths/year from CVD worldwide</div>
+            </div>
+            <div class="as-card as-card--blue">
+              <i class="bi bi-graph-up-arrow"></i>
+              <div class="as-num">80%</div>
+              <div class="as-label">Preventable with early detection</div>
+            </div>
+            <div class="as-card as-card--green">
+              <i class="bi bi-robot"></i>
+              <div class="as-num">ML</div>
+              <div class="as-label">Ensemble AI for better accuracy</div>
+            </div>
+            <div class="as-card as-card--teal">
+              <i class="bi bi-clock-history"></i>
+              <div class="as-num">&lt;2s</div>
+              <div class="as-label">Prediction in under 2 seconds</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-7 ps-lg-5">
+          <h3 class="fw-bold mb-3">Clinical-Grade Prediction, Simplified</h3>
+          <p class="text-muted mb-4">
+            CardioSense applies an ensemble Voting Classifier combining Random Forest, Gradient
+            Boosting, and AdaBoost — all trained on a balanced, real-world clinical dataset.
+            The system analyses 16 key clinical and lifestyle indicators to generate a
+            personalised risk score with actionable recommendations.
+          </p>
+          <div class="about-checks">
+            <div class="ac-item"><i class="bi bi-check-circle-fill"></i>Trained on 10,000 real patient records</div>
+            <div class="ac-item"><i class="bi bi-check-circle-fill"></i>SMOTE-balanced dataset for fair predictions</div>
+            <div class="ac-item"><i class="bi bi-check-circle-fill"></i>4 ensemble models compared and combined</div>
+            <div class="ac-item"><i class="bi bi-check-circle-fill"></i>Personalised recommendations for each user</div>
+            <div class="ac-item"><i class="bi bi-check-circle-fill"></i>Built with Python, Flask, and scikit-learn</div>
+          </div>
+          <a href="/predict" class="btn cs-btn-primary mt-4">
+            <i class="bi bi-stethoscope me-2"></i>Take the Assessment
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FEATURES ─────────────────────────────────────────── -->
+  <section class="features-section section-pad" id="features">
+    <div class="container">
+      <div class="section-header text-center mb-5">
+        <div class="section-tag">How It Works</div>
+        <h2 class="section-title">Three Simple Steps</h2>
+      </div>
+      <div class="row g-4 justify-content-center">
+
+        <div class="col-md-4">
+          <div class="step-card">
+            <div class="step-num">01</div>
+            <div class="step-icon-wrap">
+              <i class="bi bi-clipboard2-pulse"></i>
+            </div>
+            <h4 class="step-title">Enter Clinical Data</h4>
+            <p class="step-desc">Fill in 16 clinical & lifestyle parameters including blood pressure, cholesterol, BMI, smoking status, and more.</p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="step-card step-card--accent">
+            <div class="step-num">02</div>
+            <div class="step-icon-wrap">
+              <i class="bi bi-cpu"></i>
+            </div>
+            <h4 class="step-title">AI Analysis</h4>
+            <p class="step-desc">Our Voting Classifier ensemble processes your inputs through three trained ML models — Random Forest, Gradient Boosting & AdaBoost.</p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="step-card">
+            <div class="step-num">03</div>
+            <div class="step-icon-wrap">
+              <i class="bi bi-file-medical"></i>
+            </div>
+            <h4 class="step-title">Get Your Report</h4>
+            <p class="step-desc">Receive a detailed risk score, probability gauge, and personalised health recommendations tailored to your profile.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ──────────────────────────────────────────────── -->
+  <section class="cta-section section-pad">
+    <div class="container">
+      <div class="cta-card">
+        <div class="cta-blob"></div>
+        <div class="row align-items-center">
+          <div class="col-lg-8">
+            <h2 class="cta-title">Ready to check your heart health?</h2>
+            <p class="cta-sub">It takes less than 2 minutes. No account required. Completely private.</p>
+          </div>
+          <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
+            <a href="/predict" class="btn cta-btn btn-lg">
+              <i class="bi bi-heart-pulse me-2"></i>Start Assessment Now
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── DISCLAIMER ────────────────────────────────────────── -->
+  <div class="disclaimer-banner">
+    <div class="container">
+      <i class="bi bi-exclamation-triangle-fill me-2"></i>
+      <strong>Medical Disclaimer:</strong> CardioSense is an academic ML project and is
+      <strong>not</strong> a substitute for professional medical advice, diagnosis, or treatment.
+      Always consult a qualified healthcare professional.
+    </div>
+  </div>
+
+  <!-- ── FOOTER ────────────────────────────────────────────── -->
+  <footer class="cs-footer">
+    <div class="container">
+      <div class="row gy-4 align-items-start">
+        <div class="col-md-6">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <i class="bi bi-heart-pulse-fill footer-brand-icon"></i>
+            <span class="footer-brand-name">CardioSense</span>
+          </div>
+          <p class="footer-desc">
+            AI-based cardiac risk screening designed for preventive care and early awareness.
+          </p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <h6 class="footer-heading">Contact</h6>
+          <p class="footer-desc footer-contact mb-0">
+            support@cardiosense.ai<br>
+            Prototype built for research and clinical data insights.
+          </p>
+        </div>
+      </div>
+      <div class="footer-bottom d-flex justify-content-center mt-4 pt-4">
+        <p class="footer-copy mb-0">© 2024 CardioSense. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Scroll-reveal animation trigger -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.step-card, .as-card, .ac-item').forEach(el => {
+      el.classList.add('reveal');
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>

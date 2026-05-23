@@ -1,0 +1,18 @@
+Changes made to reduce overfitting:
+
+1. Random Forest
+   - Reduced max_depth
+   - Increased min_samples_split
+   - Increased min_samples_leaf
+   - Reduced estimator complexity
+
+2. Voting Classifier
+   - Added regularisation to Random Forest
+   - Reduced Gradient Boosting complexity
+   - Added AdaBoost into ensemble
+   - Lowered learning rate and tree depth
+
+Expected result:
+   - Lower train accuracy
+   - More balanced train/test gap
+   - Healthier generalisation

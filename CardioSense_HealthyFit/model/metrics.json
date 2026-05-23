@@ -1,0 +1,58 @@
+{
+  "Random Forest": {
+    "accuracy": 65.3,
+    "precision": 61.1,
+    "recall": 66.4,
+    "f1": 63.6,
+    "roc_auc": 71.6,
+    "train_acc": 68.2,
+    "test_acc": 65.3,
+    "fit_status": "healthy",
+    "cm_tp": 758,
+    "cm_tn": 875,
+    "cm_fp": 483,
+    "cm_fn": 384
+  },
+  "Gradient Boosting": {
+    "accuracy": 64.4,
+    "precision": 62.0,
+    "recall": 57.1,
+    "f1": 59.4,
+    "roc_auc": 69.0,
+    "train_acc": 66.3,
+    "test_acc": 64.4,
+    "fit_status": "healthy",
+    "cm_tp": 652,
+    "cm_tn": 958,
+    "cm_fp": 400,
+    "cm_fn": 490
+  },
+  "AdaBoost": {
+    "accuracy": 62.9,
+    "precision": 60.1,
+    "recall": 55.9,
+    "f1": 57.9,
+    "roc_auc": 66.5,
+    "train_acc": 64.2,
+    "test_acc": 62.9,
+    "fit_status": "healthy",
+    "cm_tp": 638,
+    "cm_tn": 935,
+    "cm_fp": 423,
+    "cm_fn": 504
+  },
+  "Voting Classifier": {
+    "accuracy": 64.8,
+    "precision": 61.5,
+    "recall": 60.9,
+    "f1": 61.2,
+    "roc_auc": 70.2,
+    "train_acc": 67.0,
+    "test_acc": 64.8,
+    "fit_status": "healthy",
+    "cm_tp": 696,
+    "cm_tn": 923,
+    "cm_fp": 435,
+    "cm_fn": 446
+  }
+}
