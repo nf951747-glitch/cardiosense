@@ -9,19 +9,19 @@ CardioSense is a machine learning web application that predicts a user's risk of
 
 ## Screenshots
 
-# Home Page 
+### Home Page 
 
 <img width="1920" height="914" alt="image" src="https://github.com/user-attachments/assets/5b7bfcf4-22ec-425f-be4d-f011bab37aed" />
 <img width="1920" height="917" alt="image" src="https://github.com/user-attachments/assets/a1ae68e2-e61f-43b9-928b-0563046bcb7a" />
 
 
-# Prediction Form 
+### Prediction Form 
 
 <img width="1920" height="917" alt="image" src="https://github.com/user-attachments/assets/3f3b1e28-dd93-4b90-99c4-229ff8542a35" />
 <img width="1920" height="911" alt="image" src="https://github.com/user-attachments/assets/3480295e-3e07-4cac-9fd3-6cad8542beb2" />
 
 
-# Result Page 
+### Result Page 
 
 <img width="1920" height="912" alt="image" src="https://github.com/user-attachments/assets/75f6a1f5-1a61-4947-bbdb-f785d2dd2466" />
 <img width="1920" height="917" alt="image" src="https://github.com/user-attachments/assets/6f9a73f6-31f0-4963-8fa5-07c868d88d6b" />
