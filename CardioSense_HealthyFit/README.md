@@ -10,22 +10,19 @@ CardioSense is a machine learning web application that predicts a user's risk of
 ## Screenshots
 
 Home Page 
-<img width="1920" height="915" alt="image" src="https://github.com/user-attachments/assets/fc09c33e-1efa-4f96-85ef-26dee99a781e" />
-<img width="1920" height="913" alt="image" src="https://github.com/user-attachments/assets/68cbb22b-f9c1-431f-be46-ad3b5043c7b9" />
-<img width="1920" height="916" alt="image" src="https://github.com/user-attachments/assets/4d6eb7a3-e936-4171-874e-664afe525438" />
+<img width="1920" height="914" alt="image" src="https://github.com/user-attachments/assets/5b7bfcf4-22ec-425f-be4d-f011bab37aed" />
+<img width="1920" height="917" alt="image" src="https://github.com/user-attachments/assets/a1ae68e2-e61f-43b9-928b-0563046bcb7a" />
 
 
 Prediction Form 
-<img width="1920" height="915" alt="image" src="https://github.com/user-attachments/assets/411e020b-148e-45a1-b4b9-d598362bc698" />
-<img width="1920" height="917" alt="image" src="https://github.com/user-attachments/assets/84acb7c1-14b4-4168-87fc-84e0e84dddee" />
-<img width="1920" height="915" alt="image" src="https://github.com/user-attachments/assets/736b9599-734d-4503-9dfe-555bb61e39d9" />
+<img width="1920" height="917" alt="image" src="https://github.com/user-attachments/assets/3f3b1e28-dd93-4b90-99c4-229ff8542a35" />
+<img width="1920" height="911" alt="image" src="https://github.com/user-attachments/assets/3480295e-3e07-4cac-9fd3-6cad8542beb2" />
 
 
 Result Page 
-<img width="1920" height="912" alt="image" src="https://github.com/user-attachments/assets/b80b7eab-aaef-4aa6-b423-b047ee884894" />
-<img width="1920" height="918" alt="image" src="https://github.com/user-attachments/assets/d5d97fe4-5b94-431b-9b6a-ed0be3207e2b" />
-<img width="1920" height="915" alt="image" src="https://github.com/user-attachments/assets/84cf3d91-8a69-410d-9087-d28f3a72526c" />
-<img width="1920" height="920" alt="image" src="https://github.com/user-attachments/assets/e249e24f-bed7-432d-810b-e8efb177c03c" />
+<img width="1920" height="912" alt="image" src="https://github.com/user-attachments/assets/75f6a1f5-1a61-4947-bbdb-f785d2dd2466" />
+<img width="1920" height="917" alt="image" src="https://github.com/user-attachments/assets/6f9a73f6-31f0-4963-8fa5-07c868d88d6b" />
+<img width="1920" height="915" alt="image" src="https://github.com/user-attachments/assets/8a8ebf84-25ea-4d28-b10a-ab455978492d" />
 
 
 ---
@@ -204,10 +201,10 @@ python app.py
 
 ## Author
 
-**Your Name**
+**Noor Fatima**
 BSCS Student — Lahore Garrison University
-[LinkedIn](https://linkedin.com/in/your-profile) · [GitHub](https://github.com/nf951747-glitch)
+[GitHub](https://github.com/nf951747-glitch)
 
 ---
 
-*Built as a Computer Science course project — 2025/2026*
+*Built as a Computer Science course project — 2026*
