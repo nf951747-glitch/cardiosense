@@ -117,6 +117,16 @@ A key challenge during development was reducing the train/test accuracy gap. Cha
 
 Result: all four models show a train-test gap well under 10%, confirming healthy generalisation.
 
+## Visualizations
+
+### Model Comparison
+![Model Comparison](CardioSense_HealthyFit/plots/plot_step23_model_comparison.png)
+
+### Feature Importance
+![Feature Importance](CardioSense_HealthyFit/plots/plot_step24_feature_importance.png)
+
+### Confusion Matrices
+![Confusion Matrices](CardioSense_HealthyFit/plots/plot_step21_confusion_matrices.png)
 ---
 
 ## Project Structure
